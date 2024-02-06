@@ -23,9 +23,21 @@ export function NewNoteCard() {
   function handleSaveNote(event: FormEvent) {
     event.preventDefault()
 
+    if(content === "") {
+      return toast.error("Adicione uma nota antes de salvar!")
+    }
+
     console.log(content)
 
     toast.success("Nota criada com sucesso!")
+    setContent("")
+    setShouldShowOnboarding(true)
+  }
+
+  // without this function, when you close the new note card with the textarea open and then click on it again,
+  // it'll open the textarea without the option of choosing "gravando uma nota".
+  function closeNewNote() {
+    setShouldShowOnboarding(true)
   }
 
   return(
@@ -43,7 +55,7 @@ export function NewNoteCard() {
         <Dialog.Overlay className="inset-0 fixed bg-black/50"/>
         <Dialog.Content className="fixed overflow-hidden left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[640px] w-full h-[60vh] bg-slate-700 rounded-md dlex flex-col outline-none">
           <Dialog.Close className="absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100">
-            <X className='size-5'/>
+            <X className='size-5' onClick={closeNewNote}/>
           </Dialog.Close>
 
           <form onSubmit={handleSaveNote}>
