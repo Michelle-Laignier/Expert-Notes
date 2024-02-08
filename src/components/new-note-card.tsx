@@ -46,6 +46,8 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   // it'll open the textarea without the option of choosing "gravando uma nota".
   function closeNewNote() {
     setShouldShowOnboarding(true)
+
+    handleStopRecording()
   }
 
   function handleStartRecording() {
@@ -109,8 +111,8 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
             <X className='size-5' onClick={closeNewNote}/>
           </Dialog.Close>
 
-          <form>
-            <div className='flex flex-1 flex-col gap-3 p-5'>
+          <form className='h-full'>
+            <div className='flex flex-1 flex-col gap-3 p-5 h-3/4'>
               <span className="text-sm font-medium text-slate-300">
                 Adicionar nota
               </span>
